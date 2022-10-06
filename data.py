@@ -1,16 +1,17 @@
 import os
 import librosa
+import numpy
 import json
 import math
 
-DATASET_PATH = "../Data"
+DATASET_PATH = "./Data"
 JSON_PATH = "data.json"
 
 SAMPLE_RATE = 22050
 DURATION = 30
 SAMPLES_PER_TRACK = SAMPLE_RATE * DURATION
 
-def save_mfcc(dataset_path, json_path, n_mfcc=13, n_fft=20, hop_length=512, num_segments=5) :
+def save_mfcc(dataset_path, json_path, n_mfcc=13, n_fft=20, hop_length=512, num_segments=2) :
     
     # make dictionary to store data
     song_data = {
@@ -37,13 +38,16 @@ def save_mfcc(dataset_path, json_path, n_mfcc=13, n_fft=20, hop_length=512, num_
             for f in filenames:
 
                 file_path = os.path.join(dirpath, f)
-                signal, sr = librosa.load(file_path, sr=SAMPLE_RATE)
+                try:
+                    signal, sr = librosa.load(file_path, sr=SAMPLE_RATE)
+                except:
+                    print("error") # actually coded
 
                 for s in range(num_segments) :
                     start_sample = num_samples_per_segment * s
                     finish_sample = start_sample + num_samples_per_segment
 
-                    mfcc = librosa.feature.mfcc(signal[start_sample:finish_sample], sr=sr, n_fft=n_fft, n_mfcc=n_mfcc, hop_length=hop_length)
+                    mfcc = librosa.feature.mfcc(y = signal[start_sample:finish_sample], sr = sr, n_fft=n_fft, n_mfcc=n_mfcc, hop_length=hop_length)
                     mfcc = mfcc.T
 
                     if len(mfcc) == expected_num_mfcc_vectors_per_segment :
@@ -58,5 +62,6 @@ def save_mfcc(dataset_path, json_path, n_mfcc=13, n_fft=20, hop_length=512, num_
 
 
 
-if __name__ == "__main__"  :
-    save_mfcc(DATASET_PATH, JSON_PATH)
+# if __name__ == "__main__"  :
+save_mfcc(DATASET_PATH, JSON_PATH)
+#print("working")
