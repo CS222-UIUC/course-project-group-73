@@ -29,7 +29,7 @@ def save_mfcc(dataset_path, json_path, n_mfcc=13, n_fft=20, hop_length=512, num_
         if dirpath is not dataset_path:
 
             # fill mapping array
-            dirpath_components = dirpath.split("/")
+            dirpath_components = dirpath.split("//")
             semantic_label = dirpath_components[-1]
             song_data["mapping"].append(semantic_label)
             print("\nProcessing {}".format(semantic_label))
