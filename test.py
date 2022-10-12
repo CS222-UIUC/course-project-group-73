@@ -1,6 +1,12 @@
 import calc
 
 
-def test_add():
-    assert calc.add(1, 2) == 3
-    assert calc.add(4, 5) ==9
+def test_load_data() :
+    inputs, targets = load_data("./data.json")
+    print(inputs)
+    for i in targets:
+        print(i)
+        assert (0 <= i <= 9)
+
+
+print("all test cases passed")
