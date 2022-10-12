@@ -41,4 +41,4 @@ if __name__ == '__main__':
     model.compile(optimizer=optimizer, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
     model.summary()
 
-    history = model.fit(targets_train, targets_train, validation_data=(inputs_test, targets_test), batch_size=32, epochs=50)
+    history = model.fit(inputs_train, targets_train, validation_data=(inputs_test, targets_test), batch_size=32, epochs=50)
