@@ -36,3 +36,9 @@ if __name__ == '__main__':
         keras.layers.Dense(64, activation='relu'),
         keras.layers.Dense(10, activation='softmax'),
     ])
+
+    optimiser = keras.optimizers.Adam(learning_rate=0.0001)
+    model.compile(optimiser=optimiser, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    model.summary()
+
+    history = model.fit(targets_train, targets_test, validation_data=(inputs_train, inputs_test), batch_size=32, epochs=50)
