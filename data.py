@@ -5,9 +5,7 @@ import json
 import math
 
 DATASET_PATH = "./Data"
-TEST_PATH = "./test_data"
 JSON_PATH = "data.json"
-JSON_TEST_PATH = "test_data.json"
 
 SAMPLE_RATE = 22050
 DURATION = 30
@@ -66,5 +64,3 @@ def save_mfcc(dataset_path, json_path, n_mfcc=13, n_fft=20, hop_length=512, num_
 if __name__ == "__main__"  :
     save_mfcc(DATASET_PATH, JSON_PATH)
 
-if __name__ == "__test__" :
-    save_mfcc(TEST_PATH, JSON_TEST_PATH )

@@ -1,8 +1,9 @@
 import calc
+from genre_classifier import *
 
 
 def test_load_data() :
-    inputs, targets = load_data("./data.json")
+    inputs, targets = load_data("data.json")
     print(inputs)
     for i in targets:
         print(i)
