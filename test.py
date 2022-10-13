@@ -4,7 +4,8 @@ from genre_classifier import *
 
 def test_load_data() :
     inputs, targets = load_data("data.json")
-    assert(len(inputs) == 2000)
+    assert(len(inputs) == 1999)
+    # print(len(inputs))
     for i in targets:
         assert (0 <= i <= 9)
     
