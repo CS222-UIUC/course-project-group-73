@@ -57,8 +57,11 @@ if __name__ == '__main__':
     model = keras.Sequential([
         keras.layers.Flatten(input_shape=(inputs.shape[1], inputs.shape[2])),
         keras.layers.Dense(512, activation='relu'),
+        keras.layers.Dropout(0.3),
         keras.layers.Dense(256, activation='relu'),
+        keras.layers.Dropout(0.3),
         keras.layers.Dense(64, activation='relu'),
+        keras.layers.Dropout(0.3),
         keras.layers.Dense(10, activation='softmax'),
     ])
 
