@@ -31,7 +31,7 @@ def plot_history(history):
     axs[0].set_ylabel("accuracy")
     axs[0].legend(loc="lower right")
     axs[0].set_title("Accuracy eval")
-
+    
 
     #create the error subplot
     axs[1].plot(history.history["loss"], label = "train error")
@@ -41,6 +41,8 @@ def plot_history(history):
     axs[1].legend(loc="upper right")
     axs[1].set_title("Error eval")
 
+
+    plt.savefig("error_accuracy.png")
     plt.show()
 
 
