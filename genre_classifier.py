@@ -59,18 +59,20 @@ if __name__ == '__main__':
 
     model = keras.Sequential([
         keras.layers.Flatten(input_shape=(inputs.shape[1], inputs.shape[2])),
+        keras.layers.Dense(2048, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
+        keras.layers.Dropout(0.2),
         keras.layers.Dense(1024, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
-        keras.layers.Dropout(0.1),
+        keras.layers.Dropout(0.2),
         keras.layers.Dense(512, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
-        keras.layers.Dropout(0.1),
+        keras.layers.Dropout(0.2),
         keras.layers.Dense(256, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
-        keras.layers.Dropout(0.1),
+        keras.layers.Dropout(0.2),
         keras.layers.Dense(64, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
-        keras.layers.Dropout(0.1),
+        keras.layers.Dropout(0.2),
         keras.layers.Dense(10, activation='softmax'),
     ])
 
-    optimizer = keras.optimizers.Adam(learning_rate=0.0001)
+    optimizer = keras.optimizers.Adam(learning_rate=0.00006)
     model.compile(optimizer=optimizer, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
     model.summary()
 
