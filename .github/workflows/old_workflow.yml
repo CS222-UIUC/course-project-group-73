@@ -20,9 +20,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install pylint pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      - name: Lint with pylint
-        run: |
-          args = "pip install -r requirements.txt ; pylint **/*.py"
+     # - name: Lint with pylint
+       # run: |
+        #  args = "pip install -r requirements.txt ; pylint **/*.py"
       - name: Test with pytest
         run: |
           pytest
