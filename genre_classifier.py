@@ -11,6 +11,7 @@ import tensorflow.keras as keras
 import matplotlib.pyplot as plt
 
 DATASET_PATH = './data.json'
+GLOBAL_HISTORY = None
 
 def load_data(dataset_path):
     with open(dataset_path, "r") as fp:
@@ -59,19 +60,32 @@ if __name__ == '__main__':
     model = keras.Sequential([
         keras.layers.Flatten(input_shape=(inputs.shape[1], inputs.shape[2])),
         keras.layers.Dense(512, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
-        keras.layers.Dropout(0.3),
+        keras.layers.Dropout(0.1),
         keras.layers.Dense(256, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
-        keras.layers.Dropout(0.3),
+        keras.layers.Dropout(0.1),
         keras.layers.Dense(64, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
-        keras.layers.Dropout(0.3),
+        keras.layers.Dropout(0.1),
         keras.layers.Dense(10, activation='softmax'),
     ])
 
-    optimizer = keras.optimizers.Adam(learning_rate=0.0001)
+    optimizer = keras.optimizers.Adam(learning_rate=0.00005)
     model.compile(optimizer=optimizer, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
     model.summary()
 
     history = model.fit(inputs_train, targets_train, validation_data=(inputs_test, targets_test), batch_size=32, epochs=50)
-
+    GLOBAL_HISTORY = history
     #plot the accuracy and error vs epoch
     plot_history(history)
+
+def test_accuracy_change(history):
+    training_accuracy = history.history["accuracy"]
+    assert training_accuracy[0] < training_accuracy[-1]
+    print(training_accuracy)
+
+    val_accuracy = history.history["val_accuracy"]
+    assert val_accuracy[0] < val_accuracy[-1]
+    print(val_accuracy)
+
+
+test_accuracy_change(GLOBAL_HISTORY)
+print("All test cases passed - the model improved accuracy")
