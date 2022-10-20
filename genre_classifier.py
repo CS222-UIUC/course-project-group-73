@@ -3,6 +3,7 @@
 # build the network architecture
 # compile network
 # train network
+# https://www.youtube.com/playlist?list=PL-wATfeyAMNrtbkCNsLcpoAyBBRJZVlnf
 
 import json
 import numpy as np

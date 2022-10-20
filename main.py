@@ -1,5 +1,5 @@
 # imports
-
+# https://www.youtube.com/playlist?list=PL-wATfeyAMNrtbkCNsLcpoAyBBRJZVlnf
 from python_speech_features import mfcc
 import scipy.io.wavfile as wav
 import numpy as np
