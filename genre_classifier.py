@@ -59,6 +59,8 @@ if __name__ == '__main__':
 
     model = keras.Sequential([
         keras.layers.Flatten(input_shape=(inputs.shape[1], inputs.shape[2])),
+        keras.layers.Dense(1024, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
+        keras.layers.Dropout(0.1),
         keras.layers.Dense(512, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
         keras.layers.Dropout(0.1),
         keras.layers.Dense(256, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
