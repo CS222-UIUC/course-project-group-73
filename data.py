@@ -4,6 +4,7 @@ import numpy
 import json
 import math
 
+# source: https://www.youtube.com/playlist?list=PL-wATfeyAMNrtbkCNsLcpoAyBBRJZVlnf
 DATASET_PATH = "./Data"
 JSON_PATH = "data.json"
 
