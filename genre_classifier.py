@@ -59,24 +59,30 @@ if __name__ == '__main__':
 
     model = keras.Sequential([
         keras.layers.Flatten(input_shape=(inputs.shape[1], inputs.shape[2])),
+        keras.layers.Dense(5096, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
+        keras.layers.Dropout(0.25),
         keras.layers.Dense(2048, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
-        keras.layers.Dropout(0.2),
+        keras.layers.Dropout(0.25),
         keras.layers.Dense(1024, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
-        keras.layers.Dropout(0.2),
+        keras.layers.Dropout(0.25),
         keras.layers.Dense(512, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
-        keras.layers.Dropout(0.2),
+        keras.layers.Dropout(0.25),
         keras.layers.Dense(256, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
-        keras.layers.Dropout(0.2),
+        keras.layers.Dropout(0.25),
+        keras.layers.Dense(128, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
+        keras.layers.Dropout(0.25),
         keras.layers.Dense(64, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
+        keras.layers.Dropout(0.25),
+        keras.layers.Dense(32, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
         keras.layers.Dropout(0.2),
         keras.layers.Dense(10, activation='softmax'),
     ])
 
-    optimizer = keras.optimizers.Adam(learning_rate=0.00006)
+    optimizer = keras.optimizers.Adam(learning_rate=0.0001)
     model.compile(optimizer=optimizer, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
     model.summary()
 
-    history = model.fit(inputs_train, targets_train, validation_data=(inputs_test, targets_test), batch_size=32, epochs=100)
+    history = model.fit(inputs_train, targets_train, validation_data=(inputs_test, targets_test), batch_size=32, epochs=200)
 
     #plot the accuracy and error vs epoch
     plot_history(history)
