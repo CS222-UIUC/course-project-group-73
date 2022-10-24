@@ -83,7 +83,7 @@ if __name__ == '__main__':
     model.compile(optimizer=optimizer, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
     model.summary()
 
-    history = model.fit(inputs_train, targets_train, validation_data=(inputs_test, targets_test), batch_size=32, epochs=200)
+    history = model.fit(inputs_train, targets_train, validation_data=(inputs_test, targets_test), batch_size=32, epochs=100)
 
     #plot the accuracy and error vs epoch
     plot_history(history)
