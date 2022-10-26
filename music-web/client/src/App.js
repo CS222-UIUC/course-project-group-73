@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Main from './components/Main';
 
 function App() {
   const [data, setData] = useState([{}]);
@@ -14,11 +15,15 @@ function App() {
 
   return (
     <div>
-      {typeof data.members === "undefined" ? (
+      <h1>
+        Music File
+      </h1>
+      <Main />
+      {/* {typeof data.members === "undefined" ? (
         <p>Loading...</p>
       ) : (
         <p>{data.members}</p>
-      )}
+      )} */}
     </div>
   );
 }
