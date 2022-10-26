@@ -4,3 +4,5 @@ __pycache__/
 data.json
 .pytest_cache
 .vscode
+model.h5
+model.json
