@@ -19,6 +19,8 @@ from genre_classifier import load_data, plot_history, prepare_dataset, build_mod
 # geek_method()
 # print(add(100, 1000000))
 
+
+
 model = keras.models.load_model('../../model.h5')
 print(model)
 
