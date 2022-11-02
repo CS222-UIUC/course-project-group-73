@@ -59,7 +59,17 @@ function App() {
       </div>
       <form className={styles.form}>
         <input type="file" onChange={uploadFile}></input>
+        <label for="my-modal" class="btn">open modal</label>
         <button className="btn">Upload</button>
+        <input type="checkbox" id="my-modal" class="modal-toggle" />
+        <div class="modal">
+          <div class="modal-box w-11/12 max-w-5xl">
+            <p class="py-4">Genre</p>
+            <div class="modal-action">
+              <label for="my-modal" class="btn">Yay!</label>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
   );
