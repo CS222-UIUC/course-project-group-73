@@ -11,7 +11,7 @@ import sys
 sys.path.append('../../')
  
 # importing
-from genre_classifier import load_data, plot_history, prepare_dataset, build_model, predict
+from genre_classifier import load_data, plot_history, prepare_dataset, build_model, predict, actualPredict
  
 #  venv\Scripts\activate\\\
 # virtualenv venv
@@ -37,8 +37,8 @@ print(add(1,2))
 def upload_file():
     """Handles the upload of a file."""
     d = {}
-    try:
-        file = request.files['file_from_react']
+    try: 
+        file = request.files['file_from_react'] # .wav file (user input)
         print(type(file))
         filename = file.filename
         print(f"Uploading file {filename}")
