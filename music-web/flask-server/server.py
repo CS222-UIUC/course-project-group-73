@@ -22,6 +22,17 @@ from genre_classifier import load_data, plot_history, prepare_dataset, build_mod
 model = keras.models.load_model('../../model.h5')
 print(model)
 
+import sys
+ 
+# setting path
+sys.path.append('../../')
+# importing
+from genre_classifier import add
+# from ..genre_classifier import *
+
+
+print("running...")
+print(add(1,2))
 @app.route('/upload_file', methods=['POST'])
 def upload_file():
     """Handles the upload of a file."""
