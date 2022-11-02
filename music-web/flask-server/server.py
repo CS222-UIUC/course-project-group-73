@@ -29,7 +29,7 @@ sys.path.append('../../')
 # importing
 from genre_classifier import add
 # from ..genre_classifier import *
-
+import os
 
 print("running...")
 print(add(1,2))
@@ -41,9 +41,17 @@ def upload_file():
         file = request.files['file_from_react'] # .wav file (user input)
         print(type(file))
         filename = file.filename
+    
+        # validate the type of the file is .mp3 or .wav file:
+        i = filename.index('.') # index of the period in file name
+        file_ext = filename[i+1:]
+        if file_ext != 'mp3' and file_ext != 'wav':
+            raise Exception("File type not supported")
+
         print(f"Uploading file {filename}")
         file_bytes = file.read()
         file_content = BytesIO(file_bytes).readlines()
+        file.save(os.path.join('./uploads', filename))
         print(file_content)
         d['status'] = 1
 

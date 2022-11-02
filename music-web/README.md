@@ -1,5 +1,7 @@
 # Windows:
 
+Note: make sure to have an uploads folder, since it is in the .gitignore right now.
+
 Open two terminals.
 Back-end:
 
