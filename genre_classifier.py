@@ -3,6 +3,7 @@
 # build the network architecture
 # compile network
 # train network
+# source: https://www.youtube.com/playlist?list=PL-wATfeyAMNrtbkCNsLcpoAyBBRJZVlnf
 
 import json
 import numpy as np
@@ -47,47 +48,161 @@ def plot_history(history):
     plt.show()
 
 
-
+def prepare_dataset(test_size, validation_size):
+ 
+    # load data
+    X, y = load_data(DATASET_PATH)    
+ 
+    #create train/test split
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = test_size)
+ 
+ 
+    #create train/validation splits
+    X_train, X_validation, y_train, y_validation = train_test_split(X_train, y_train, test_size = validation_size)
+    #20% of data used for validation
+ 
+    # Tensorflow expects a 3D array for each sample (130, 13, 1)
+    # 3rd dimension is the channel
+    X_train = X_train[..., np.newaxis] # now it's a 4D array -> (num_samples, 130, 13, 1)
+    X_validation = X_validation[..., np.newaxis]
+    X_test = X_test[...,np.newaxis]
+ 
+    return X_train, X_validation, X_test, y_train, y_validation, y_test
+ 
+def build_model(input_shape):
+    # create model
+    model = keras.Sequential()
+    # 1st convolution layer
+    # numKernels, size of grid, activation function we want to use
+    model.add(keras.layers.Conv2D(32, (3, 3), activation = 'relu', input_shape = input_shape))
+    model.add(keras.layers.MaxPool2D((3, 3), strides = (2, 2), padding = 'same'))
+    model.add(keras.layers.BatchNormalization()) # helps speed up training, model converges faster
+ 
+    # 2nd convolution layer
+    model.add(keras.layers.Conv2D(32, (3, 3), activation = 'relu', input_shape = input_shape))
+    model.add(keras.layers.MaxPool2D((3, 3), strides = (2, 2), padding = 'same'))
+    model.add(keras.layers.BatchNormalization())
+ 
+    # 3rd convolution layer
+    model.add(keras.layers.Conv2D(32, (2, 2), activation = 'relu', input_shape = input_shape))
+    model.add(keras.layers.MaxPool2D((2, 2), strides = (2, 2), padding = 'same'))
+    model.add(keras.layers.BatchNormalization())
+ 
+    # flatten the output (of convolution layers)
+    # feed this output into a dense layer
+    model.add(keras.layers.Flatten())
+    model.add(keras.layers.Dense(64, activation = 'relu'))
+    model.add(keras.layers.Dropout(0.3)) # to prevent overfitting
+   
+    # output layer
+    # we want as many neurons as we have genres
+    model.add(keras.layers.Dense(10, activation = 'softmax'))
+   
+    return model
+ 
+def predict(model, X, y):
+   
+   
+     X = X[np.newaxis, ...]
+ 
+    #prediction  = [ [0.1, 0.2, ...] ]
+     prediction = model.predict(X)
+ 
+     #extract index with max value
+     predicted_index = np.argmax(prediction, axis = 1) # [index b/w 0 and 9]
+     print("Expected index: {}, Predicted index: {}".format(y, predicted_index))
 
 
 if __name__ == '__main__':
-    inputs, targets = load_data(DATASET_PATH)
 
-    # 30% of data for test set
-    # 70% for train set
-    inputs_train, inputs_test, targets_train, targets_test = train_test_split(inputs, targets, test_size=0.3)
+    # Create train, validation, and test sets
+    X_train, X_validation, X_test, y_train, y_validation, y_test = prepare_dataset(0.25, 0.2)
+ 
+    # build the CNN net
+    # input shape -> (130, 13, 1)
+    input_shape = (X_train.shape[1], X_train.shape[2], X_train.shape[3])
+    model =  build_model(input_shape)
+ 
+    #compile the network
+    optimizer = keras.optimizers.Adam(learning_rate = 0.0001)
+    model.compile(optimizer = optimizer,
+                    loss = "sparse_categorical_crossentropy",
+                    metrics = ['accuracy'])
+ 
+    #train the CNN
+    model.fit(X_train, y_train, validation_data = (X_validation, y_validation), batch_size = 32, epochs = 30)
+ 
+    #evalute the CNN on the train set
+    test_error, test_accuracy = model.evaluate(X_test, y_test, verbose = 1)
+    print("Accuracy on test set is: {}".format(test_accuracy))
+ 
+    # make prediction on a sample
+    # X = input data
+    # y = label
+    X = X_test[100]
+    y = y_test[100]
+    predict(model, X, y)
 
-    model = keras.Sequential([
-        keras.layers.Flatten(input_shape=(inputs.shape[1], inputs.shape[2])),
-        keras.layers.Dense(1024, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
-        keras.layers.Dropout(0.1),
-        keras.layers.Dense(512, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
-        keras.layers.Dropout(0.1),
-        keras.layers.Dense(256, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
-        keras.layers.Dropout(0.1),
-        keras.layers.Dense(64, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
-        keras.layers.Dropout(0.1),
-        keras.layers.Dense(10, activation='softmax'),
-    ])
+    # serialize model to JSON
+    model_json = model.to_json()
+    with open("model.json", "w") as json_file:
+        json_file.write(model_json)
+    # serialize weights to HDF5
+    model.save_weights("model.h5")
+    print("Saved model to disk")
 
-    optimizer = keras.optimizers.Adam(learning_rate=0.0001)
-    model.compile(optimizer=optimizer, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-    model.summary()
+#     inputs, targets = load_data(DATASET_PATH)
 
-    history = model.fit(inputs_train, targets_train, validation_data=(inputs_test, targets_test), batch_size=32, epochs=100)
+#     # 30% of data for test set
+#     # 70% for train set
+#     inputs_train, inputs_test, targets_train, targets_test = train_test_split(inputs, targets, test_size=0.3)
 
-    #plot the accuracy and error vs epoch
-    plot_history(history)
+#     model = keras.Sequential([
+#         keras.layers.Flatten(input_shape=(inputs.shape[1], inputs.shape[2])),
+#         keras.layers.Dense(5096, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
+#         keras.layers.Dropout(0.25),
+#         keras.layers.Dense(2048, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
+#         keras.layers.Dropout(0.25),
+#         keras.layers.Dense(1024, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
+#         keras.layers.Dropout(0.25),
+#         keras.layers.Dense(512, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
+#         keras.layers.Dropout(0.25),
+#         keras.layers.Dense(256, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
+#         keras.layers.Dropout(0.25),
+#         keras.layers.Dense(128, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
+#         keras.layers.Dropout(0.25),
+#         keras.layers.Dense(64, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
+#         keras.layers.Dropout(0.25),
+#         keras.layers.Dense(32, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
+#         keras.layers.Dropout(0.2),
+#         keras.layers.Dense(10, activation='softmax'),
+#     ])
 
-def test_accuracy_change(history):
-    training_accuracy = history.history["accuracy"]
-    assert training_accuracy[0] < training_accuracy[-1]
-    print(training_accuracy)
+#     optimizer = keras.optimizers.Adam(learning_rate=0.0001)
+#     model.compile(optimizer=optimizer, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+#     model.summary()
 
-    val_accuracy = history.history["val_accuracy"]
-    assert val_accuracy[0] < val_accuracy[-1]
-    print(val_accuracy)
+#     history = model.fit(inputs_train, targets_train, validation_data=(inputs_test, targets_test), batch_size=32, epochs=20)
+
+    
+    
+
+#     prediction = model.predict(input_matrix)
+#     print(prediction)
+#     print("prediction is above")
+
+#     #plot the accuracy and error vs epoch
+#     plot_history(history)
+
+# def test_accuracy_change(history):
+#     training_accuracy = history.history["accuracy"]
+#     assert training_accuracy[0] < training_accuracy[-1]
+#     print(training_accuracy)
+
+#     val_accuracy = history.history["val_accuracy"]
+#     assert val_accuracy[0] < val_accuracy[-1]
+#     print(val_accuracy)
 
 
-test_accuracy_change(GLOBAL_HISTORY)
-print("All test cases passed - the model improved accuracy")
+# test_accuracy_change(GLOBAL_HISTORY)
+# print("All test cases passed - the model improved accuracy")

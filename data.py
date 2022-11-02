@@ -4,6 +4,7 @@ import numpy
 import json
 import math
 
+# source: https://www.youtube.com/playlist?list=PL-wATfeyAMNrtbkCNsLcpoAyBBRJZVlnf
 DATASET_PATH = "./Data"
 JSON_PATH = "data.json"
 
@@ -11,7 +12,7 @@ SAMPLE_RATE = 22050
 DURATION = 30
 SAMPLES_PER_TRACK = SAMPLE_RATE * DURATION
 
-def save_mfcc(dataset_path, json_path, n_mfcc=13, n_fft=2048, hop_length=512, num_segments=7) :
+def save_mfcc(dataset_path, json_path, n_mfcc=13, n_fft=2048, hop_length=512, num_segments=6) :
     # make dictionary to store data
     song_data = {
         "mapping": [],
