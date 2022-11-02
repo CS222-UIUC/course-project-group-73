@@ -14,6 +14,9 @@ import matplotlib.pyplot as plt
 DATASET_PATH = './data.json'
 GLOBAL_HISTORY = None
 
+def add(a, b):
+    return a + b
+
 def load_data(dataset_path):
     with open(dataset_path, "r") as fp:
         data = json.load(fp)
@@ -130,7 +133,7 @@ if __name__ == '__main__':
                     metrics = ['accuracy'])
  
     #train the CNN
-    model.fit(X_train, y_train, validation_data = (X_validation, y_validation), batch_size = 32, epochs = 30)
+    model.fit(X_train, y_train, validation_data = (X_validation, y_validation), batch_size = 32, epochs = 3)
  
     #evalute the CNN on the train set
     test_error, test_accuracy = model.evaluate(X_test, y_test, verbose = 1)
@@ -144,11 +147,11 @@ if __name__ == '__main__':
     predict(model, X, y)
 
     # serialize model to JSON
-    model_json = model.to_json()
-    with open("model.json", "w") as json_file:
-        json_file.write(model_json)
+    # model_json = model.to_json()
+    # with open("model.json", "w") as json_file:
+        # json_file.write(model_json)
     # serialize weights to HDF5
-    model.save_weights("model.h5")
+    model.save(save_format='h5', filepath='model.h5')
     print("Saved model to disk")
 
 #     inputs, targets = load_data(DATASET_PATH)
