@@ -13,6 +13,17 @@ app = Flask(__name__)
 from flask_cors import CORS
 CORS(app)
 
+import sys
+ 
+# setting path
+sys.path.append('../../')
+# importing
+from genre_classifier import add
+# from ..genre_classifier import *
+
+
+print("running...")
+print(add(1,2))
 @app.route('/upload_file', methods=['POST'])
 def upload_file():
     """Handles the upload of a file."""

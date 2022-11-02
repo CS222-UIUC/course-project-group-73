@@ -111,7 +111,18 @@ def predict(model, X, y):
      #extract index with max value
      predicted_index = np.argmax(prediction, axis = 1) # [index b/w 0 and 9]
      print("Expected index: {}, Predicted index: {}".format(y, predicted_index))
+    
 
+# Use for run-time inputs
+def actualPredict(model, X):
+    labels = ["blues", "classical", "country", "disco", "hiphop", "jazz", "metal", "pop", "reggae", "rock"]
+    X - X[np.newaxis, ...]
+    prediction = model.predict(X)
+    predicted_index = np.argmax(prediction, axis = 1)
+    return labels[predicted_index]
+
+def add(a,b):
+    return a + b
 
 if __name__ == '__main__':
 
@@ -130,11 +141,13 @@ if __name__ == '__main__':
                     metrics = ['accuracy'])
  
     #train the CNN
-    model.fit(X_train, y_train, validation_data = (X_validation, y_validation), batch_size = 32, epochs = 30)
+    history = model.fit(X_train, y_train, validation_data = (X_validation, y_validation), batch_size = 32, epochs = 30)
  
     #evalute the CNN on the train set
     test_error, test_accuracy = model.evaluate(X_test, y_test, verbose = 1)
     print("Accuracy on test set is: {}".format(test_accuracy))
+
+    plot_history(history)
  
     # make prediction on a sample
     # X = input data
@@ -192,7 +205,7 @@ if __name__ == '__main__':
 #     print("prediction is above")
 
 #     #plot the accuracy and error vs epoch
-#     plot_history(history)
+#     
 
 # def test_accuracy_change(history):
 #     training_accuracy = history.history["accuracy"]
