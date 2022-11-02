@@ -1,8 +1,7 @@
 # Windows:
 
-Two terminals:
-
-Startup the backend:
+Open two terminals.
+Back-end:
 
 ```
 cd flask-server
@@ -16,6 +15,7 @@ http://localhost:5000/members
 Startup the frontend:
 
 ```
+cd music-web
 cd client
 npm start
 ```
