@@ -4,16 +4,6 @@ import "./App.css";
 import styles from "./styles/App.module.css";
 
 function App() {
-  // const [data, setData] = useState([{}]);
-
-  // useEffect(() => {
-  //   fetch("/api/members")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setData(data);
-  //       console.log(data);
-  //     });
-  // }, []);
   const uploadFile = async (e) => {
     const file = e.target.files[0];
     if (file != null) {
