@@ -14,6 +14,9 @@ import matplotlib.pyplot as plt
 DATASET_PATH = './data.json'
 GLOBAL_HISTORY = None
 
+def add(a, b):
+    return a + b
+
 def load_data(dataset_path):
     with open(dataset_path, "r") as fp:
         data = json.load(fp)
@@ -111,6 +114,15 @@ def predict(model, X, y):
      #extract index with max value
      predicted_index = np.argmax(prediction, axis = 1) # [index b/w 0 and 9]
      print("Expected index: {}, Predicted index: {}".format(y, predicted_index))
+    
+
+# Use for run-time inputs
+def actualPredict(model, X):
+    labels = ["blues", "classical", "country", "disco", "hiphop", "jazz", "metal", "pop", "reggae", "rock"]
+    X - X[np.newaxis, ...]
+    prediction = model.predict(X)
+    predicted_index = np.argmax(prediction, axis = 1)
+    return labels[predicted_index]
 
 
 if __name__ == '__main__':
@@ -135,6 +147,8 @@ if __name__ == '__main__':
     #evalute the CNN on the train set
     test_error, test_accuracy = model.evaluate(X_test, y_test, verbose = 1)
     print("Accuracy on test set is: {}".format(test_accuracy))
+
+    plot_history(history)
  
     # make prediction on a sample
     # X = input data
@@ -144,11 +158,11 @@ if __name__ == '__main__':
     predict(model, X, y)
 
     # serialize model to JSON
-    model_json = model.to_json()
-    with open("model.json", "w") as json_file:
-        json_file.write(model_json)
+    # model_json = model.to_json()
+    # with open("model.json", "w") as json_file:
+        # json_file.write(model_json)
     # serialize weights to HDF5
-    model.save_weights("model.h5")
+    model.save(save_format='h5', filepath='model.h5')
     print("Saved model to disk")
 
 #     inputs, targets = load_data(DATASET_PATH)
@@ -192,7 +206,7 @@ if __name__ == '__main__':
 #     print("prediction is above")
 
 #     #plot the accuracy and error vs epoch
-#     plot_history(history)
+#     
 
 # def test_accuracy_change(history):
 #     training_accuracy = history.history["accuracy"]

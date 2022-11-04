@@ -1,8 +1,9 @@
 # Windows:
 
-Two terminals:
+Note: make sure to have an uploads folder, since it is in the .gitignore right now.
 
-Startup the backend:
+Open two terminals.
+Back-end:
 
 ```
 cd flask-server
@@ -16,6 +17,7 @@ http://localhost:5000/members
 Startup the frontend:
 
 ```
+cd music-web
 cd client
 npm start
 ```
