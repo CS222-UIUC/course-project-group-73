@@ -32,7 +32,6 @@ from genre_classifier import add
 import os
 
 print("running...")
-print(add(1,2))
 @app.route('/upload_file', methods=['POST'])
 def upload_file():
     """Handles the upload of a file."""
