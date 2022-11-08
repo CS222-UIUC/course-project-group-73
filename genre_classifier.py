@@ -117,11 +117,12 @@ def predict(model, X, y):
     
 
 # Use for run-time inputs
-def actualPredict(model, X):
+def actual_predict(model, X):
     labels = ["blues", "classical", "country", "disco", "hiphop", "jazz", "metal", "pop", "reggae", "rock"]
     X = X[np.newaxis, ...]
     prediction = model.predict(X)
     predicted_index = np.argmax(prediction, axis = 1)
+    print("Model's predicted genre: {}".format(labels[predicted_index]))
     return labels[predicted_index]
 
 
@@ -142,7 +143,7 @@ if __name__ == '__main__':
                     metrics = ['accuracy'])
  
     #train the CNN
-    model.fit(X_train, y_train, validation_data = (X_validation, y_validation), batch_size = 32, epochs = 30)
+    history = model.fit(X_train, y_train, validation_data = (X_validation, y_validation), batch_size = 32, epochs = 30)
  
     #evalute the CNN on the train set
     test_error, test_accuracy = model.evaluate(X_test, y_test, verbose = 1)
@@ -154,8 +155,9 @@ if __name__ == '__main__':
     # X = input data
     # y = label
     X = X_test[100]
-    y = y_test[100]
-    predict(model, X, y)
+    # y = y_test[100]
+    #predict(model, X, y)
+    actual_predict(model, X)
 
     # serialize model to JSON
     # model_json = model.to_json()
