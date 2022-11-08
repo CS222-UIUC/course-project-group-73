@@ -119,7 +119,7 @@ def predict(model, X, y):
 # Use for run-time inputs
 def actualPredict(model, X):
     labels = ["blues", "classical", "country", "disco", "hiphop", "jazz", "metal", "pop", "reggae", "rock"]
-    X - X[np.newaxis, ...]
+    X = X[np.newaxis, ...]
     prediction = model.predict(X)
     predicted_index = np.argmax(prediction, axis = 1)
     return labels[predicted_index]
