@@ -11,7 +11,7 @@ import sys
 sys.path.append('../../')
  
 # importing
-from genre_classifier import load_data, plot_history, prepare_dataset, build_model, predict, actualPredict
+from genre_classifier import load_data, plot_history, prepare_dataset, build_model, predict, actual_predict
  
 #  venv\Scripts\activate\\\
 # virtualenv venv
