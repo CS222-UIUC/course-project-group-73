@@ -103,27 +103,29 @@ def build_model(input_shape):
    
     return model
  
-def predict(model, X, y):
+# def predict(model, X, y):
    
    
-     X = X[np.newaxis, ...]
+#     #  X = X[np.newaxis, ...]
+#     X = X[..., np.newaxis]
  
-    #prediction  = [ [0.1, 0.2, ...] ]
-     prediction = model.predict(X)
- 
-     #extract index with max value
-     predicted_index = np.argmax(prediction, axis = 1) # [index b/w 0 and 9]
-     print("Expected index: {}, Predicted index: {}".format(y, predicted_index))
+#     #prediction  = [ [0.1, 0.2, ...] ]
+#     prediction = model.predict(X)
+
+#     #extract index with max value
+#     predicted_index = np.argmax(prediction, axis = 1) # [index b/w 0 and 9]
+#     print("Expected index: {}, Predicted index: {}".format(y, predicted_index))
     
 
 # Use for run-time inputs
-def actualPredict(model, X):
+def actual_predict(model, X):
     labels = ["blues", "classical", "country", "disco", "hiphop", "jazz", "metal", "pop", "reggae", "rock"]
-    X - X[np.newaxis, ...]
+    # X = np.reshape(X, (216, 13, 1))
+    # X = X[np.newaxis, ...]
+    # X = X[np.newaxis, ...]
     prediction = model.predict(X)
     predicted_index = np.argmax(prediction, axis = 1)
-    return labels[predicted_index]
-
+    return labels[predicted_index[0]]
 
 if __name__ == '__main__':
 
@@ -142,7 +144,7 @@ if __name__ == '__main__':
                     metrics = ['accuracy'])
  
     #train the CNN
-    model.fit(X_train, y_train, validation_data = (X_validation, y_validation), batch_size = 32, epochs = 30)
+    history = model.fit(X_train, y_train, validation_data = (X_validation, y_validation), batch_size = 32, epochs = 30)
  
     #evalute the CNN on the train set
     test_error, test_accuracy = model.evaluate(X_test, y_test, verbose = 1)
@@ -153,9 +155,12 @@ if __name__ == '__main__':
     # make prediction on a sample
     # X = input data
     # y = label
-    X = X_test[100]
-    y = y_test[100]
-    predict(model, X, y)
+    X = X_test[3]
+    print(X_test.shape)
+    print(X.shape)
+    # y = y_test[100]
+    #predict(model, X, y)
+    # print(actual_predict(model, X))
 
     # serialize model to JSON
     # model_json = model.to_json()
@@ -163,6 +168,7 @@ if __name__ == '__main__':
         # json_file.write(model_json)
     # serialize weights to HDF5
     model.save(save_format='h5', filepath='model.h5')
+    # model.save_weights("model.h5")
     print("Saved model to disk")
 
 #     inputs, targets = load_data(DATASET_PATH)

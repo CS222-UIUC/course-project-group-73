@@ -1,10 +1,17 @@
-import React, { useState, useEffect } from "react";
-// import Main from "./components/Main";
 import "./App.css";
 import styles from "./styles/App.module.css";
+import { useState } from "react";
 
 function App() {
+  // const [file, setFile] = useState(null);
+  const [genre, setGenre] = useState("");
+
+  // function handleChange(event) {
+  //   setFile(event.target.files[0]);
+  // }
+
   const uploadFile = async (e) => {
+    // e.preventDefault();
     const file = e.target.files[0];
     if (file != null) {
       const data = new FormData();
@@ -14,13 +21,67 @@ function App() {
         method: "post",
         body: data,
       });
-
       let res = await response.json();
-      if (res.status !== 1) {
-        console.log("Error uploading file");
-      }
+      // if (res.status !== 1) {
+      //   alert("Error uploading file");
+      // }
+      console.log(res);
+      setGenre(res["result"]);
     }
   };
+
+  // const uploadFile = async (e) => {
+  //   e.preventDefault();
+  //   // console.log(file);
+  //   // const formData = new FormData();
+
+  //   // formData.append("file", file);
+
+  //   // await fetch("http://localhost:5000/upload_file", {
+  //   //   method: "POST",
+  //   //   body: formData,
+  //   //   headers: {
+  //   //     "Content-Type": "multipart/form-data",
+  //   //   },
+  //   // }).then((response) => {
+  //   //   console.log(response);
+  //   // });
+  //   // await fetch("http://localhost:5000/upload_file", {
+  //   //   method: "POST",
+  //   //   body: formData,
+  //   //   // method: "POST",
+  //   //   headers: {
+  //   //     "Content-Type": "multipart/form-data",
+  //   //   },
+  //   // })
+  //   //   .then((response) => response.json())
+  //   //   .then((result) => {
+  //   //     console.log("Success:", result);
+  //   //   })
+  //   //   .catch((error) => {
+  //   //     console.error("Error:", error);
+  //   //   });
+  //   // console.log("Clicked");
+  //   // // const file = e.target.files[0];
+  //   // console.log(e.target.file);
+  //   if (file != null) {
+  //     const data = new FormData();
+  //     data.append("file_from_react", file);
+  //     // enctype = multipart / form - data;
+  //     let response = await fetch("http://localhost:5000/upload_file", {
+  //       method: "post",
+  //       body: data,
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //       },
+  //     });
+
+  //     let res = await response.json();
+  //     if (res.status !== 1) {
+  //       console.log("Error uploading file");
+  //     }
+  //   }
+  // };
 
   return (
     <div className={styles.container}>
@@ -48,19 +109,27 @@ function App() {
         </div>
       </div>
       <form className={styles.form}>
-        <input type="file" onChange={uploadFile}></input>
-        <label for="my-modal" class="btn">open modal</label>
-        <button className="btn">Upload</button>
-        <input type="checkbox" id="my-modal" class="modal-toggle" />
-        <div class="modal">
-          <div class="modal-box w-11/12 max-w-5xl">
-            <p class="py-4">Genre</p>
-            <div class="modal-action">
-              <label for="my-modal" class="btn">Yay!</label>
+        <input onChange={uploadFile} type="file" accept=".mp3,.wav"></input>
+
+        {/* <label for="my-modal" class="btn">
+          open modal
+        </label> */}
+        <button onClick={uploadFile} className="btn">
+          Upload
+        </button>
+        <input type="checkbox" id="my-modal" className="modal-toggle" />
+        <div className="modal">
+          <div className="modal-box w-11/12 max-w-5xl">
+            <p className="py-4">Genre</p>
+            <div className="modal-action">
+              <label htmlFor="my-modal" className="btn">
+                Yay!
+              </label>
             </div>
           </div>
         </div>
       </form>
+      <h1>Genre: {genre}</h1>
     </div>
   );
 }
