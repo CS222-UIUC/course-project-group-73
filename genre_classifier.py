@@ -120,6 +120,8 @@ def predict(model, X, y):
 def actual_predict(model, X):
     labels = ["blues", "classical", "country", "disco", "hiphop", "jazz", "metal", "pop", "reggae", "rock"]
     X = X[np.newaxis, ...]
+    # if (X.shape != (None, 259, 13, 1)):
+
     prediction = model.predict(X)
     predicted_index = np.argmax(prediction, axis = 1)
     print("Model's predicted genre: {}".format(labels[predicted_index]))
