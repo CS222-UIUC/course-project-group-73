@@ -114,7 +114,7 @@ function App() {
           Upload
         </button>
       </form>
-      <h1>Genre: {genre}</h1>
+      <p class="text-8xl ...">Genre: {genre}</p>
     </div>
   );
 }
