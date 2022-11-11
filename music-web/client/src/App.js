@@ -110,24 +110,9 @@ function App() {
       </div>
       <form className={styles.form}>
         <input onChange={uploadFile} type="file" accept=".mp3,.wav"></input>
-
-        {/* <label for="my-modal" class="btn">
-          open modal
-        </label> */}
         <button onClick={uploadFile} className="btn">
           Upload
         </button>
-        <input type="checkbox" id="my-modal" className="modal-toggle" />
-        <div className="modal">
-          <div className="modal-box w-11/12 max-w-5xl">
-            <p className="py-4">Genre</p>
-            <div className="modal-action">
-              <label htmlFor="my-modal" className="btn">
-                Yay!
-              </label>
-            </div>
-          </div>
-        </div>
       </form>
       <h1>Genre: {genre}</h1>
     </div>
