@@ -168,7 +168,7 @@ if __name__ == '__main__':
                     metrics = ['accuracy'])
  
     #train the CNN
-    history = model.fit(X_train, y_train, validation_data = (X_validation, y_validation), batch_size = 32, epochs = 30)
+    history = model.fit(X_train, y_train, validation_data = (X_validation, y_validation), batch_size = 32, epochs = 200)
  
     #evalute the CNN on the train set
     test_error, test_accuracy = model.evaluate(X_test, y_test, verbose = 1)
