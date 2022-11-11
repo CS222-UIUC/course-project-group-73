@@ -39,6 +39,7 @@ def save_mfcc(dataset_path, json_path, n_mfcc=13, n_fft=2048, hop_length=512, nu
             for f in filenames:
 
                 file_path = os.path.join(dirpath, f)
+                print(file_path)
                 try:
                     signal, sr = librosa.load(file_path, sr=SAMPLE_RATE)
                 except:
@@ -63,4 +64,3 @@ def save_mfcc(dataset_path, json_path, n_mfcc=13, n_fft=2048, hop_length=512, nu
 
 if __name__ == "__main__"  :
     save_mfcc(DATASET_PATH, JSON_PATH)
-
