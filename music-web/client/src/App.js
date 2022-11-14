@@ -1,19 +1,32 @@
 import "./App.css";
 import styles from "./styles/App.module.css";
 import { useState } from "react";
+// import pink from "../../flask-server/uploads/PinkPanther30.wav";
 
 function App() {
-  // const [file, setFile] = useState(null);
+  const [file, setFile] = useState(null);
   const [genre, setGenre] = useState("");
 
-  // function handleChange(event) {
-  //   setFile(event.target.files[0]);
-  // }
+  function handleAudioPlay() {
+    var AudioPlay = new Audio(file);
+    AudioPlay.play()
+      .then(() => {
+        // Audio is playing.
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   const uploadFile = async (e) => {
     // e.preventDefault();
     const file = e.target.files[0];
     if (file != null) {
+      // check length
+      // if (file.size > 10000000) {
+
+      // var AudioPlay = new Audio(file);
+      // AudioPlay.play();
       const data = new FormData();
       data.append("file_from_react", file);
 
@@ -26,6 +39,8 @@ function App() {
       //   alert("Error uploading file");
       // }
       console.log(res);
+      setFile(URL.createObjectURL(e.target.files[0]));
+      console.log(file);
       setGenre(res["result"]);
     }
   };
@@ -90,6 +105,10 @@ function App() {
       </h1>
       {/* <h1 className="text-5xl font-bold">Music Genre Classifier</h1> */}
       <p>Upload an audio file and see what the genre is.</p>
+      <p>
+        Possible outputs = ["blues", "classical", "country", "disco", "hiphop",
+        "jazz", "metal", "pop", "reggae", "rock"].
+      </p>
       <div className={`${styles.warning} alert alert-info shadow-lg`}>
         <div>
           <svg
@@ -111,16 +130,20 @@ function App() {
       <form className={styles.form}>
         <input onChange={uploadFile} type="file" accept=".mp3,.wav"></input>
 
-        {/* <label for="my-modal" class="btn">
-          open modal
-        </label> */}
-        <button onClick={uploadFile} className="btn">
-          Upload
-        </button>
+        <label for="my-modal" class="btn">
+          View Results
+        </label>
+        {/* <button className="btn">View Results</button> */}
         <input type="checkbox" id="my-modal" className="modal-toggle" />
         <div className="modal">
           <div className="modal-box w-11/12 max-w-5xl">
-            <p className="py-4">Genre</p>
+            <p className="py-4">Genre: "{genre}".</p>
+            <div
+              onClick={handleAudioPlay}
+              className="btn backdrop:btn-sm btn-success"
+            >
+              Play Audio
+            </div>
             <div className="modal-action">
               <label htmlFor="my-modal" className="btn">
                 Yay!
@@ -129,7 +152,10 @@ function App() {
           </div>
         </div>
       </form>
-      <h1>Genre: {genre}</h1>
+      {/* <h1>Genre: {genre}</h1> */}
+      {/* <button onClick={handleClick} className="btn">
+        Upload
+      </button> */}
     </div>
   );
 }
