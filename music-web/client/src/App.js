@@ -152,66 +152,86 @@ function App() {
         </div>
       </div>
       <div className={styles.badgeWrapper}>
+        <span class="inline-block animate-bounce">
         <div
           style={{ backgroundColor: getRandomColor() }}
           className="badge badge-lg"
         >
           blues
         </div>
+        </span>
+        <span class="inline-block animate-bounce">
         <div
           style={{ backgroundColor: getRandomColor() }}
           className="badge badge-lg"
         >
           classical
         </div>
+        </span>
+        <span class="inline-block animate-bounce">
         <div
           style={{ backgroundColor: getRandomColor() }}
           className="badge badge-lg"
         >
           country
         </div>
+        </span>
+        <span class="inline-block animate-bounce">
         <div
           style={{ backgroundColor: getRandomColor() }}
           className="badge badge-lg"
         >
           disco
         </div>
+        </span>
+        <span class="inline-block animate-bounce">
         <div
           style={{ backgroundColor: getRandomColor() }}
           className="badge badge-lg"
         >
           hiphop
         </div>
+        </span>
+        <span class="inline-block animate-bounce">
         <div
           style={{ backgroundColor: getRandomColor() }}
           className="badge badge-lg"
         >
           jazz
         </div>
+        </span>
+        <span class="inline-block animate-bounce">
         <div
           style={{ backgroundColor: getRandomColor() }}
           className="badge badge-lg"
         >
           metal
         </div>
+        </span>
+        <span class="inline-block animate-bounce">
         <div
           style={{ backgroundColor: getRandomColor() }}
           className="badge badge-lg"
         >
           pop
         </div>
+        </span>
+        <span class="inline-block animate-bounce">
         <div
           style={{ backgroundColor: getRandomColor() }}
           className="badge badge-lg"
         >
           reggae
         </div>
+        </span>
+        <span class="inline-block animate-bounce">
         <div
           style={{ backgroundColor: getRandomColor() }}
           className="badge badge-lg"
         >
           rock
         </div>
+        </span>
       </div>
       <form className={styles.form}>
         <input onChange={uploadFile} type="file" accept=".mp3,.wav"></input>
