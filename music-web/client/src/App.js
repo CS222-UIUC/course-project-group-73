@@ -294,6 +294,7 @@ function App() {
           </div>
         </div>
       </div> */}
+      <img src="https://media.tenor.com/SbM_HDQqUtgAAAAC/bongo-cat-playing.gif" />
       <footer class="footer footer-center items-center p-4 bg-neutral text-neutral-content">
         <div class="avatar-group -space-x-6">
           <div class="avatar">
