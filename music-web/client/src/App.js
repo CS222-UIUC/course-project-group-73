@@ -5,10 +5,12 @@ import { useState } from "react";
 
 function App() {
   const [file, setFile] = useState(null);
+  const [audio, setAudio] = useState(null);
   const [genre, setGenre] = useState("");
 
   function handleAudioPlay() {
     var AudioPlay = new Audio(file);
+    setAudio(AudioPlay);
     AudioPlay.play()
       .then(() => {
         // Audio is playing.
@@ -16,6 +18,10 @@ function App() {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  function handleAudioStop() {
+    audio.pause();
   }
 
   const uploadFile = async (e) => {
@@ -44,6 +50,15 @@ function App() {
       setGenre(res["result"]);
     }
   };
+
+  function getRandomColor() {
+    var letters = "0123456789ABCDEF";
+    var color = "#";
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
 
   // const uploadFile = async (e) => {
   //   e.preventDefault();
@@ -136,16 +151,68 @@ function App() {
           <span>You may only upload .mp3 and .wav files.</span>
         </div>
       </div>
-      <div class="badge badge-lg">blues</div>
-      <div class="badge badge-lg">classical</div>
-      <div class="badge badge-lg">country</div>
-      <div class="badge badge-lg">disco</div>
-      <div class="badge badge-lg">hiphop</div>
-      <div class="badge badge-lg">jazz</div>
-      <div class="badge badge-lg">metal</div>
-      <div class="badge badge-lg">pop</div>
-      <div class="badge badge-lg">reggae</div>
-      <div class="badge badge-lg">rock</div>
+      <div className={styles.badgeWrapper}>
+        <div
+          style={{ backgroundColor: getRandomColor() }}
+          className="badge badge-lg"
+        >
+          blues
+        </div>
+        <div
+          style={{ backgroundColor: getRandomColor() }}
+          className="badge badge-lg"
+        >
+          classical
+        </div>
+        <div
+          style={{ backgroundColor: getRandomColor() }}
+          className="badge badge-lg"
+        >
+          country
+        </div>
+        <div
+          style={{ backgroundColor: getRandomColor() }}
+          className="badge badge-lg"
+        >
+          disco
+        </div>
+        <div
+          style={{ backgroundColor: getRandomColor() }}
+          className="badge badge-lg"
+        >
+          hiphop
+        </div>
+        <div
+          style={{ backgroundColor: getRandomColor() }}
+          className="badge badge-lg"
+        >
+          jazz
+        </div>
+        <div
+          style={{ backgroundColor: getRandomColor() }}
+          className="badge badge-lg"
+        >
+          metal
+        </div>
+        <div
+          style={{ backgroundColor: getRandomColor() }}
+          className="badge badge-lg"
+        >
+          pop
+        </div>
+        <div
+          style={{ backgroundColor: getRandomColor() }}
+          className="badge badge-lg"
+        >
+          reggae
+        </div>
+        <div
+          style={{ backgroundColor: getRandomColor() }}
+          className="badge badge-lg"
+        >
+          rock
+        </div>
+      </div>
       <form className={styles.form}>
         <input onChange={uploadFile} type="file" accept=".mp3,.wav"></input>
 
@@ -163,7 +230,7 @@ function App() {
             >
               Play Audio
             </div>
-            <div className="modal-action">
+            <div onClick={handleAudioStop} className="modal-action">
               <label htmlFor="my-modal" className="btn">
                 Yay!
               </label>
