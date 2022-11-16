@@ -25,6 +25,17 @@ function App() {
     audio.pause();
   }
 
+  const toggleTheme = () => {
+    if (theme === "light") {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  };
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
+
   const uploadFile = async (e) => {
     // e.preventDefault();
     const file = e.target.files[0];
@@ -61,32 +72,74 @@ function App() {
     return color;
   }
 
-  const toggleTheme = () => {
-    if (theme === "light") {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  };
-  useEffect(() => {
-    document.body.className = theme;
-  }, [theme]);
+  // const uploadFile = async (e) => {
+  //   e.preventDefault();
+  //   // console.log(file);
+  //   // const formData = new FormData();
 
+  //   // formData.append("file", file);
+
+  //   // await fetch("http://localhost:5000/upload_file", {
+  //   //   method: "POST",
+  //   //   body: formData,
+  //   //   headers: {
+  //   //     "Content-Type": "multipart/form-data",
+  //   //   },
+  //   // }).then((response) => {
+  //   //   console.log(response);
+  //   // });
+  //   // await fetch("http://localhost:5000/upload_file", {
+  //   //   method: "POST",
+  //   //   body: formData,
+  //   //   // method: "POST",
+  //   //   headers: {
+  //   //     "Content-Type": "multipart/form-data",
+  //   //   },
+  //   // })
+  //   //   .then((response) => response.json())
+  //   //   .then((result) => {
+  //   //     console.log("Success:", result);
+  //   //   })
+  //   //   .catch((error) => {
+  //   //     console.error("Error:", error);
+  //   //   });
+  //   // console.log("Clicked");
+  //   // // const file = e.target.files[0];
+  //   // console.log(e.target.file);
+  //   if (file != null) {
+  //     const data = new FormData();
+  //     data.append("file_from_react", file);
+  //     // enctype = multipart / form - data;
+  //     let response = await fetch("http://localhost:5000/upload_file", {
+  //       method: "post",
+  //       body: data,
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //       },
+  //     });
+
+  //     let res = await response.json();
+  //     if (res.status !== 1) {
+  //       console.log("Error uploading file");
+  //     }
+  //   }
+  // };
 
   return (
     <div className={styles[theme]}>
-      <div className={`${styles.container}`}>
+      <div className={styles.container}>
         <form className={styles.form}>
           <h1 className={`${styles.header} text-5xl font-bold`}>
             Music Genre Classifier
           </h1>
-          <span class="inline-block animate-spin"></span>
-          <div className={styles.avatar}>
-            <div class="w-24 rounded">
-              <img src="https://www.freeiconspng.com/uploads/light-blue-music-note-picture-15.png" />
+
+          <span class="inline-block animate-spin">
+            <div className={styles.avatar}>
+              <div class="w-24 rounded">
+                <img src="https://www.freeiconspng.com/uploads/light-blue-music-note-picture-15.png" />
+              </div>
             </div>
-          </div>
-          </div>
+          </span>
         </form>
         {/* <h1 className="text-5xl font-bold">Music Genre Classifier</h1> */}
         <div className={styles.utilityBar}>
@@ -94,15 +147,7 @@ function App() {
           <button className="btn" onClick={toggleTheme}>
             Switch to {theme == "dark" ? "light" : " dark"} mode
           </button>
-          </div>
-        </span>
-
-        {/*
-      <p>
-        Possible outputs = ["blues", "classical", "country", "disco", "hiphop",
-        "jazz", "metal", "pop", "reggae", "rock"].
-      </p>
-      */}
+        </div>
         <div className={`${styles.warning} alert alert-info shadow-lg`}>
           <div>
             <svg
@@ -123,86 +168,86 @@ function App() {
         </div>
         <div className={styles.badgeWrapper}>
           <span class="inline-block animate-bounce">
-        <div
-            style={{ backgroundColor: getRandomColor() }}
-            className="badge badge-lg"
-          >
-            blues
-          </div>
+            <div
+              style={{ backgroundColor: getRandomColor() }}
+              className="badge badge-lg"
+            >
+              blues
+            </div>
           </span>
-        <span class="inline-block animate-bounce">
-        <div
-            style={{ backgroundColor: getRandomColor() }}
-            className="badge badge-lg"
-          >
-            classical
-          </div>
+          <span class="inline-block animate-bounce">
+            <div
+              style={{ backgroundColor: getRandomColor() }}
+              className="badge badge-lg"
+            >
+              classical
+            </div>
           </span>
-        <span class="inline-block animate-bounce">
-        <div
-            style={{ backgroundColor: getRandomColor() }}
-            className="badge badge-lg"
-          >
-            country
-          </div>
+          <span class="inline-block animate-bounce">
+            <div
+              style={{ backgroundColor: getRandomColor() }}
+              className="badge badge-lg"
+            >
+              country
+            </div>
           </span>
-        <span class="inline-block animate-bounce">
-        <div
-            style={{ backgroundColor: getRandomColor() }}
-            className="badge badge-lg"
-          >
-            disco
-          </div>
+          <span class="inline-block animate-bounce">
+            <div
+              style={{ backgroundColor: getRandomColor() }}
+              className="badge badge-lg"
+            >
+              disco
+            </div>
           </span>
-        <span class="inline-block animate-bounce">
-        <div
-            style={{ backgroundColor: getRandomColor() }}
-            className="badge badge-lg"
-          >
-            hiphop
-          </div>
+          <span class="inline-block animate-bounce">
+            <div
+              style={{ backgroundColor: getRandomColor() }}
+              className="badge badge-lg"
+            >
+              hiphop
+            </div>
           </span>
-        <span class="inline-block animate-bounce">
-        <div
-            style={{ backgroundColor: getRandomColor() }}
-            className="badge badge-lg"
-          >
-            jazz
-          </div>
+          <span class="inline-block animate-bounce">
+            <div
+              style={{ backgroundColor: getRandomColor() }}
+              className="badge badge-lg"
+            >
+              jazz
+            </div>
           </span>
-        <span class="inline-block animate-bounce">
-        <div
-            style={{ backgroundColor: getRandomColor() }}
-            className="badge badge-lg"
-          >
-            metal
-          </div>
+          <span class="inline-block animate-bounce">
+            <div
+              style={{ backgroundColor: getRandomColor() }}
+              className="badge badge-lg"
+            >
+              metal
+            </div>
           </span>
-        <span class="inline-block animate-bounce">
-        <div
-            style={{ backgroundColor: getRandomColor() }}
-            className="badge badge-lg"
-          >
-            pop
-          </div>
+          <span class="inline-block animate-bounce">
+            <div
+              style={{ backgroundColor: getRandomColor() }}
+              className="badge badge-lg"
+            >
+              pop
+            </div>
           </span>
-        <span class="inline-block animate-bounce">
-        <div
-            style={{ backgroundColor: getRandomColor() }}
-            className="badge badge-lg"
-          >
-            reggae
-          </div>
+          <span class="inline-block animate-bounce">
+            <div
+              style={{ backgroundColor: getRandomColor() }}
+              className="badge badge-lg"
+            >
+              reggae
+            </div>
           </span>
-        <span class="inline-block animate-bounce">
-        <div
-            style={{ backgroundColor: getRandomColor() }}
-            className="badge badge-lg"
-          >
-            rock
-          </div>
+          <span class="inline-block animate-bounce">
+            <div
+              style={{ backgroundColor: getRandomColor() }}
+              className="badge badge-lg"
+            >
+              rock
+            </div>
+          </span>
         </div>
-        </span>
         <form className={styles.form}>
           <input onChange={uploadFile} type="file" accept=".mp3,.wav"></input>
 
@@ -222,7 +267,7 @@ function App() {
               </div>
               <div onClick={handleAudioStop} className="modal-action">
                 <label htmlFor="my-modal" className="btn">
-                  exit
+                  Yay!
                 </label>
               </div>
             </div>
@@ -263,11 +308,8 @@ function App() {
         </div>
       </div> */}
         <img src="https://media.tenor.com/SbM_HDQqUtgAAAAC/bongo-cat-playing.gif" />
-      <footer class="footer footer-center items-center p-4 bg-neutral text-neutral-content">
-          <div
-            style={{ marginTop: "1rem", marginBottom: "0rem" }}
-            class="avatar-group -space-x-6"
-          >
+        <footer class="footer footer-center items-center p-4 bg-neutral text-neutral-content">
+          <div class="avatar-group -space-x-6">
             <div class="avatar">
               <div class="w-12">
                 <img src="https://canvas.illinois.edu/images/thumbnails/5557236/TSSHozO2UuzaG5XQqBHQoZBgmc2TDaSex4RvYGjD" />
