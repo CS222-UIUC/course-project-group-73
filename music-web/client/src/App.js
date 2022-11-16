@@ -100,15 +100,24 @@ function App() {
 
   return (
     <div className={styles.container}>
-      <h1 className={`${styles.header} text-5xl font-bold`}>
-        Music Genre Classifier
-      </h1>
+      <form className={styles.form}>
+        <h1 className={`${styles.header} text-5xl font-bold`}>
+          Music Genre Classifier
+        </h1>
+        <div class="avatar">
+          <div class="w-24 rounded">
+            <img src="https://www.freeiconspng.com/uploads/light-blue-music-note-picture-15.png" />
+          </div>
+        </div>
+      </form>
       {/* <h1 className="text-5xl font-bold">Music Genre Classifier</h1> */}
       <p>Upload an audio file and see what the genre is.</p>
+      {/*
       <p>
         Possible outputs = ["blues", "classical", "country", "disco", "hiphop",
         "jazz", "metal", "pop", "reggae", "rock"].
       </p>
+      */}
       <div className={`${styles.warning} alert alert-info shadow-lg`}>
         <div>
           <svg
@@ -127,6 +136,16 @@ function App() {
           <span>You may only upload .mp3 and .wav files.</span>
         </div>
       </div>
+      <div class="badge badge-lg">blues</div>
+      <div class="badge badge-lg">classical</div>
+      <div class="badge badge-lg">country</div>
+      <div class="badge badge-lg">disco</div>
+      <div class="badge badge-lg">hiphop</div>
+      <div class="badge badge-lg">jazz</div>
+      <div class="badge badge-lg">metal</div>
+      <div class="badge badge-lg">pop</div>
+      <div class="badge badge-lg">reggae</div>
+      <div class="badge badge-lg">rock</div>
       <form className={styles.form}>
         <input onChange={uploadFile} type="file" accept=".mp3,.wav"></input>
 
