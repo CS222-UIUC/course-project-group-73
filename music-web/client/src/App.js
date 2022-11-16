@@ -1,12 +1,13 @@
 import "./App.css";
 import styles from "./styles/App.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import pink from "../../flask-server/uploads/PinkPanther30.wav";
 
 function App() {
   const [file, setFile] = useState(null);
   const [audio, setAudio] = useState(null);
   const [genre, setGenre] = useState("");
+  const [theme, setTheme] = useState("light");
 
   function handleAudioPlay() {
     var AudioPlay = new Audio(file);
@@ -23,6 +24,18 @@ function App() {
   function handleAudioStop() {
     audio.pause();
   }
+
+  const toggleTheme = () => {
+    if (theme === "light") {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  };
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
+
 
   const uploadFile = async (e) => {
     // e.preventDefault();
@@ -114,13 +127,15 @@ function App() {
   // };
 
   return (
+    <div className={styles[theme]}>
     <div className={styles.container}>
       <form className={styles.form}>
         <h1 className={`${styles.header} text-5xl font-bold`}>
           Music Genre Classifier
         </h1>
+        
         <span class="inline-block animate-spin">
-          <div class="avatar">
+          <div className={styles.avatar}>
             <div class="w-24 rounded">
               <img src="https://www.freeiconspng.com/uploads/light-blue-music-note-picture-15.png" />
             </div>
@@ -128,13 +143,12 @@ function App() {
         </span>
       </form>
       {/* <h1 className="text-5xl font-bold">Music Genre Classifier</h1> */}
+      <div className={styles.utilityBar}>
       <p>Upload an audio file and see what the genre is.</p>
-      {/*
-      <p>
-        Possible outputs = ["blues", "classical", "country", "disco", "hiphop",
-        "jazz", "metal", "pop", "reggae", "rock"].
-      </p>
-      */}
+          <button className="btn" onClick={toggleTheme}>
+            Switch to {theme == "dark" ? "light" : " dark"} mode
+          </button>
+      </div>
       <div className={`${styles.warning} alert alert-info shadow-lg`}>
         <div>
           <svg
@@ -370,6 +384,7 @@ function App() {
           </a>
         </div> */}
       </footer>
+    </div>
     </div>
   );
 }
