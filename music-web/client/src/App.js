@@ -269,12 +269,28 @@ function App() {
       <br /> 
       <br /> 
       <br /> 
-      <br /> 
-      <br /> 
-      <br /> 
-      <br /> 
-      <br /> 
-      <br /> 
+      <div class="avatar-group -space-x-6">
+  <div class="avatar">
+    <div class="w-12">
+      <img src="https://canvas.illinois.edu/images/thumbnails/5557236/TSSHozO2UuzaG5XQqBHQoZBgmc2TDaSex4RvYGjD" />
+    </div>
+  </div>
+  <div class="avatar">
+    <div class="w-12">
+      <img src="https://canvas.illinois.edu/images/thumbnails/5725397/DplRsnCFyu8ucKAnv6ngMZbCILvzX6xT74HjNh1M" />
+    </div>
+  </div>
+  <div class="avatar">
+    <div class="w-12">
+      <img src="https://canvas.illinois.edu/images/thumbnails/5625870/vM7bPiajUwVZhlLp7fS88wJEM5XAZ2uaWsl26tIB" />
+    </div>
+  </div>
+  <div class="avatar">
+    <div class="w-12">
+      <img src="https://canvas.illinois.edu/images/thumbnails/5738960/Cb35NY02lYzDF5x1g7Jg8sQfqKWVzuiMwkDBZgnN" />
+    </div>
+  </div>
+</div>
     
       <footer class="footer items-center p-4 bg-neutral text-neutral-content">
         <div class="items-center grid-flow-col">
