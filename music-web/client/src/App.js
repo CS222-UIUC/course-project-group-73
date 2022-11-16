@@ -119,11 +119,13 @@ function App() {
         <h1 className={`${styles.header} text-5xl font-bold`}>
           Music Genre Classifier
         </h1>
-        <div class="avatar">
-          <div class="w-24 rounded">
-            <img src="https://www.freeiconspng.com/uploads/light-blue-music-note-picture-15.png" />
+        <span class="inline-block animate-spin">
+          <div class="avatar">
+            <div class="w-24 rounded">
+              <img src="https://www.freeiconspng.com/uploads/light-blue-music-note-picture-15.png" />
+            </div>
           </div>
-        </div>
+        </span>
       </form>
       {/* <h1 className="text-5xl font-bold">Music Genre Classifier</h1> */}
       <p>Upload an audio file and see what the genre is.</p>
