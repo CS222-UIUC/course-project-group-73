@@ -48,7 +48,7 @@ def plot_history(history):
 
 
     plt.savefig("error_accuracy.png")
-    plt.show()
+    #plt.show()
 
 
 def prepare_dataset(test_size, validation_size):
@@ -66,10 +66,11 @@ def prepare_dataset(test_size, validation_size):
  
     # Tensorflow expects a 3D array for each sample (130, 13, 1)
     # 3rd dimension is the channel
-    X_train = X_train[..., np.newaxis] # now it's a 4D array -> (num_samples, 130, 13, 1)
-    X_validation = X_validation[..., np.newaxis]
-    X_test = X_test[...,np.newaxis]
- 
+    # X_train = X_train[..., np.newaxis] # now it's a 4D array -> (num_samples, 130, 13, 1)
+    # X_validation = X_validation[..., np.newaxis]
+    # X_test = X_test[...,np.newaxis]
+    # code above is not required for RNN
+
     return X_train, X_validation, X_test, y_train, y_validation, y_test
  
 def build_model(input_shape):
@@ -101,6 +102,24 @@ def build_model(input_shape):
     # we want as many neurons as we have genres
     model.add(keras.layers.Dense(10, activation = 'softmax'))
    
+    return model
+
+def build_model_RNN(input_shape):
+
+    #build network topology
+    model = keras.Sequential()
+
+    # 2 LSTM layers
+    model.add(keras.layers.LSTM(64, input_shape = input_shape, return_sequences = True))
+    model.add(keras.layers.LSTM(64))
+
+    # dense layer
+    model.add(keras.layers.Dense(64, activation = 'relu'))
+    model.add(keras.layers.Dropout(0.3)) # to help with overfitting
+
+    # output layer
+    model.add(keras.layers.Dense(10, activation = 'softmax'))
+
     return model
  
 # def predict(model, X, y):
@@ -134,8 +153,12 @@ if __name__ == '__main__':
  
     # build the CNN net
     # input shape -> (130, 13, 1)
-    input_shape = (X_train.shape[1], X_train.shape[2], X_train.shape[3])
-    model =  build_model(input_shape)
+    # input_shape = (X_train.shape[1], X_train.shape[2], X_train.shape[3])
+    # model =  build_model(input_shape)
+
+    # build the RNN net
+    input_shape = (X_train.shape[1], X_train.shape[2])
+    model = build_model_RNN(input_shape)
  
     #compile the network
     optimizer = keras.optimizers.Adam(learning_rate = 0.0001)
