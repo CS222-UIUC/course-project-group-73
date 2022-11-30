@@ -153,13 +153,12 @@ if __name__ == '__main__':
  
     # build the CNN net
     # input shape -> (130, 13, 1)
-    # input_shape = (X_train.shape[1], X_train.shape[2], X_train.shape[3]) #this is for CNN
+    # input_shape = (X_train.shape[1], X_train.shape[2], X_train.shape[3])
+    # model =  build_model(input_shape)
 
-    #build the RNN net
-    input_shape = (X_train.shape[1], X_train.shape[2]) # only 2 dimensions needed (130,13)
+    # build the RNN net
+    input_shape = (X_train.shape[1], X_train.shape[2])
     model = build_model_RNN(input_shape)
-
-    # model =  build_model(input_shape) # builds a CNN model
  
     #compile the network
     optimizer = keras.optimizers.Adam(learning_rate = 0.0001)

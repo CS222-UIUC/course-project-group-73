@@ -37,6 +37,16 @@ def upload_file():
         print(f"Uploading file {filename}")
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         uploaded_file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        print(uploaded_file_path)
+
+        # check duration:
+        audio_duration = (librosa.get_duration(filename=uploaded_file_path))
+
+        if audio_duration < 30:
+            print("Audio too short")
+            d['success'] = 0
+            d['message'] = "Audio too short"
+            return jsonify(result="audio file must be longer than 30 seconds")
         signal, sr = librosa.load(uploaded_file_path, sr=22050)
         prediction_res = (actual_predict(model, np.array(get_mat(signal, sr))))
         d['status'] = 1
