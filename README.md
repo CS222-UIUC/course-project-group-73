@@ -19,8 +19,7 @@ Max & Daniel - Back-End
 - From the website (front-end), users can input a .wav audio file which is then sent to the model in the backend.
 - The model predicts the genre, and then sends the result back to the user interface.
 
-### Documentation for the project:
-# Usage instructions:
+# Usage Instructions:
 
 - To run the project locally on your machine:
 - Git clone this repository onto your local machine.
