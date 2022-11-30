@@ -10,7 +10,7 @@ JSON_PATH = "data.json"
 
 SAMPLE_RATE = 22050
 DURATION = 30
-SAMPLES_PER_TRACK = SAMPLE_RATE * DURATION
+SAMPLES_PER_TRACK = SAMPLE_RATE * DURATION # 661500
 
 def save_mfcc(dataset_path, json_path, n_mfcc=13, n_fft=2048, hop_length=512, num_segments=6) :
     # make dictionary to store data
@@ -20,8 +20,8 @@ def save_mfcc(dataset_path, json_path, n_mfcc=13, n_fft=2048, hop_length=512, nu
         "labels": []
     }
 
-    num_samples_per_segment = int(SAMPLES_PER_TRACK / num_segments)
-    expected_num_mfcc_vectors_per_segment = math.ceil(num_samples_per_segment / hop_length)
+    num_samples_per_segment = int(SAMPLES_PER_TRACK / num_segments) # 110250
+    expected_num_mfcc_vectors_per_segment = math.ceil(num_samples_per_segment / hop_length) # 215.33
 
     # iterate through genres and songs within the genres
     for i, (dirpath, dirnames, filenames) in enumerate(os.walk(dataset_path)) :
