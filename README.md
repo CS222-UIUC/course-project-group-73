@@ -5,9 +5,9 @@
 David, Jacob, Max, Daniel
 
 # Roles:
-David - Manager
-Jacob - Front-End
-Max & Daniel - Back-End
+- David - Manager
+- Jacob - Front-End
+- Max & Daniel - Back-End
 
 # Overview:
 - A website that takes in a .wav audio file and tells the user what genre of music it is.
