@@ -36,5 +36,5 @@ David, Jacob, Max, Daniel
 - Now, you can put in .wav files into the website and receive the genre.
 
 # Technologies:
-- Front-end: React, JavaScript, HTML/CSS, DaisyUI.
-- Back-end: Flask, Python, TensorFlow/Keras, NumPy, Librosa.
+- Front-End: React, JavaScript, HTML/CSS, DaisyUI.
+- Back-End: Flask, Python, TensorFlow/Keras, NumPy, Librosa.
