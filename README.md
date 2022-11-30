@@ -35,7 +35,7 @@ Technical Architecture
 - Run "npm start" in the terminal
 - You should now be on the website
 
-To rub back-end:
+To run back-end:
 - From root directory, cd into music-web
 - Then cd into flask-server
 - Run "python server.py" in the terminal
