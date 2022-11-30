@@ -1,19 +1,19 @@
 # CS 222 - Group 73
-Project: Music Genere Classifier
+# Project: Music Genre Classifier
 
-Members:
+# Members:
 David, Jacob, Max, Daniel
 
-Roles:
+# Roles:
 David - Manager
-Jacob - FrontEnd
-Max/Daniel - BackEnd
+Jacob - Front-End
+Max & Daniel - Back-End
 
-Overview
+# Overview:
 - A website that takes in a .wav audio file and tells the user what genre of music it is.
-- It uses recurrent neural networks (RNN) in the backend to build a model that predicts the genre of input music
+- It uses recurrent neural networks (RNN) in the backend to build a model that predicts the genre of input music.
 
-Technical Architecture
+# Technical Architecture:
 - We took a dataset of 1000 audio files (100 per genre) and converted each audio clip into an MFCC matrix
 - We split the songs into training and test sets and trained our model using a recurrent neural network
 - From the website (Frontend), users can input a .wav audio file which is then sent to the model in the backend
