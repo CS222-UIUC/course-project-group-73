@@ -63,13 +63,6 @@ def prepare_dataset(test_size, validation_size):
     #create train/validation splits
     X_train, X_validation, y_train, y_validation = train_test_split(X_train, y_train, test_size = validation_size)
     #20% of data used for validation
- 
-    # Tensorflow expects a 3D array for each sample (130, 13, 1)
-    # 3rd dimension is the channel
-    # X_train = X_train[..., np.newaxis] # now it's a 4D array -> (num_samples, 130, 13, 1)
-    # X_validation = X_validation[..., np.newaxis]
-    # X_test = X_test[...,np.newaxis]
-    # code above is not required for RNN
 
     return X_train, X_validation, X_test, y_train, y_validation, y_test
  
