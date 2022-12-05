@@ -73,59 +73,6 @@ function App() {
     return color;
   }
 
-  // const uploadFile = async (e) => {
-  //   e.preventDefault();
-  //   // console.log(file);
-  //   // const formData = new FormData();
-
-  //   // formData.append("file", file);
-
-  //   // await fetch("http://localhost:5000/upload_file", {
-  //   //   method: "POST",
-  //   //   body: formData,
-  //   //   headers: {
-  //   //     "Content-Type": "multipart/form-data",
-  //   //   },
-  //   // }).then((response) => {
-  //   //   console.log(response);
-  //   // });
-  //   // await fetch("http://localhost:5000/upload_file", {
-  //   //   method: "POST",
-  //   //   body: formData,
-  //   //   // method: "POST",
-  //   //   headers: {
-  //   //     "Content-Type": "multipart/form-data",
-  //   //   },
-  //   // })
-  //   //   .then((response) => response.json())
-  //   //   .then((result) => {
-  //   //     console.log("Success:", result);
-  //   //   })
-  //   //   .catch((error) => {
-  //   //     console.error("Error:", error);
-  //   //   });
-  //   // console.log("Clicked");
-  //   // // const file = e.target.files[0];
-  //   // console.log(e.target.file);
-  //   if (file != null) {
-  //     const data = new FormData();
-  //     data.append("file_from_react", file);
-  //     // enctype = multipart / form - data;
-  //     let response = await fetch("http://localhost:5000/upload_file", {
-  //       method: "post",
-  //       body: data,
-  //       headers: {
-  //         "Content-Type": "multipart/form-data",
-  //       },
-  //     });
-
-  //     let res = await response.json();
-  //     if (res.status !== 1) {
-  //       console.log("Error uploading file");
-  //     }
-  //   }
-  // };
-
   return (
     <div className={styles[theme]}>
     <div className={styles.container}>

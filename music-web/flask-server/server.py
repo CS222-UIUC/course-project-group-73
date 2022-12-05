@@ -80,18 +80,6 @@ def get_mat(signal, sr):
     # print(comb)
     return comb
 
-# save for a passed song:
-# def save_mfcc(file_name, n_mfcc=13, n_fft=2048, hop_length=512):
-#     # sample_rate = 22050
-#     # duration = 30
-#     # samples_per_track = sample_rate * duration
-#     # num_samples_per_segment = int(samples_per_track / num_segments)
-
-#     file_path = os.path.join(dirpath, f)
-#     mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=40)
-#     mfccs = mfccs.T
-#     print(mfccs)
-#     return 3
 
 if __name__ == '__main__':
     # run in development mode

@@ -63,13 +63,6 @@ def prepare_dataset(test_size, validation_size):
     #create train/validation splits
     X_train, X_validation, y_train, y_validation = train_test_split(X_train, y_train, test_size = validation_size)
     #20% of data used for validation
- 
-    # Tensorflow expects a 3D array for each sample (130, 13, 1)
-    # 3rd dimension is the channel
-    # X_train = X_train[..., np.newaxis] # now it's a 4D array -> (num_samples, 130, 13, 1)
-    # X_validation = X_validation[..., np.newaxis]
-    # X_test = X_test[...,np.newaxis]
-    # code above is not required for RNN
 
     return X_train, X_validation, X_test, y_train, y_validation, y_test
  
@@ -195,58 +188,3 @@ if __name__ == '__main__':
     # model.save_weights("model.h5")
     print("Saved model to disk")
 
-#     inputs, targets = load_data(DATASET_PATH)
-
-#     # 30% of data for test set
-#     # 70% for train set
-#     inputs_train, inputs_test, targets_train, targets_test = train_test_split(inputs, targets, test_size=0.3)
-
-#     model = keras.Sequential([
-#         keras.layers.Flatten(input_shape=(inputs.shape[1], inputs.shape[2])),
-#         keras.layers.Dense(5096, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
-#         keras.layers.Dropout(0.25),
-#         keras.layers.Dense(2048, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
-#         keras.layers.Dropout(0.25),
-#         keras.layers.Dense(1024, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
-#         keras.layers.Dropout(0.25),
-#         keras.layers.Dense(512, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
-#         keras.layers.Dropout(0.25),
-#         keras.layers.Dense(256, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
-#         keras.layers.Dropout(0.25),
-#         keras.layers.Dense(128, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
-#         keras.layers.Dropout(0.25),
-#         keras.layers.Dense(64, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
-#         keras.layers.Dropout(0.25),
-#         keras.layers.Dense(32, activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)),
-#         keras.layers.Dropout(0.2),
-#         keras.layers.Dense(10, activation='softmax'),
-#     ])
-
-#     optimizer = keras.optimizers.Adam(learning_rate=0.0001)
-#     model.compile(optimizer=optimizer, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-#     model.summary()
-
-#     history = model.fit(inputs_train, targets_train, validation_data=(inputs_test, targets_test), batch_size=32, epochs=20)
-
-    
-    
-
-#     prediction = model.predict(input_matrix)
-#     print(prediction)
-#     print("prediction is above")
-
-#     #plot the accuracy and error vs epoch
-#     
-
-# def test_accuracy_change(history):
-#     training_accuracy = history.history["accuracy"]
-#     assert training_accuracy[0] < training_accuracy[-1]
-#     print(training_accuracy)
-
-#     val_accuracy = history.history["val_accuracy"]
-#     assert val_accuracy[0] < val_accuracy[-1]
-#     print(val_accuracy)
-
-
-# test_accuracy_change(GLOBAL_HISTORY)
-# print("All test cases passed - the model improved accuracy")
